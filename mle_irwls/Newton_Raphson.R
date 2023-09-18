@@ -110,20 +110,15 @@ irwls_fun <-
 # Run the function
 # -----------------------------------------------------
 
-# The length until the convergence varies a lot by initial values
-res <- irwls_fun(X = X, b_int = c(3,3,3), y = df$y,Iter = 30)
-
-res %>% ggplot(aes(x=Iter, y=loglik)) + geom_line()
-res[12:20,] %>% ggplot(aes(x=Iter, y=loglik)) + geom_line()
+# The length until the convergence varies by initial values
+res <- irwls_fun(X = X, b_int = c(3,3,3), y = df$y, Iter = 30)
 
 res %>% ggplot(aes(x=Iter, y=b0)) + geom_line()
 res %>% ggplot(aes(x=Iter, y=b1)) + geom_line()
 res%>% ggplot(aes(x=Iter, y=b2)) + geom_line()
 
-# With the initial values, it takes a lot of iterations.
-# Beacause the estimation diverges once, the convergence looks like around 0,
-# but they converge around 1, the true parameter value.
-res <- irwls_fun(X = X, b_int = c(1,0,0), y = df$y,Iter = 250)
+# With the initial values, they also converge around 1, the true parameter value.
+res <- irwls_fun(X = X, b_int = c(-10,-10,-10), y = df$y,Iter = 100)
 res %>% ggplot(aes(x=Iter, y=b0)) + geom_line()
 res %>% ggplot(aes(x=Iter, y=b1)) + geom_line()
 res %>% ggplot(aes(x=Iter, y=b2)) + geom_line()
